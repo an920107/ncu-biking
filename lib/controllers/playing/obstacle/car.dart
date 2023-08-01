@@ -15,7 +15,26 @@ class Car extends Obstacle {
     sprite = await Sprite.load("car/car${Random().nextInt(3)}.png");
     anchor = Anchor.center;
     angle = pi / 180 * 90;
-    position = Vector2(gameRef.size.x / 2, gameRef.size.x / 2);
     return super.onLoad();
+  }
+
+  @override
+  void onMount() {
+    position = Vector2(
+      gameRef.size.x / 2 + (Random().nextBool() ? 1 : -1) * 400 * gameRef.scale,
+      -size.y / 2,
+    );
+    super.onMount();
+  }
+
+  @override
+  void update(double dt) {
+    if (gameRef.isPlaying) {
+      position.y += gameRef.baseSpeed * dt * gameRef.scale;
+      if (position.y > gameRef.size.y + size.y) {
+        removeFromParent();
+      }
+    }
+    super.update(dt);
   }
 }

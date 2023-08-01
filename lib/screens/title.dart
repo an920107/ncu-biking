@@ -25,6 +25,12 @@ class Title extends Component with HasGameRef<Main> {
   }
 
   @override
+  void onMount() {
+    gameRef.overlays.add("start_game");
+    super.onMount();
+  }
+
+  @override
   void onGameResize(Vector2 size) {
     _cover
       ..size = (_cover.sprite?.originalSize ?? Vector2.zero()) * gameRef.scale

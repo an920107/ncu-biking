@@ -6,15 +6,17 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ncu_biking/controllers/scalable_sprite.dart';
-import 'package:ncu_biking/screens/gameover.dart';
+import 'package:ncu_biking/main.dart';
 
 class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
-  Player({super.coefficient = 0.15});
+  Player({super.coefficient = 0.12});
 
-  final double _forwardSpeed = 800, _backwardSpeed = 500, _offsetSpeed = 5;
+  late final double _forwardSpeed = gameRef.baseSpeed + 300;
+  late final double _backwardSpeed = gameRef.baseSpeed;
+  final double _offsetSpeed = 5;
   final _hitbox = RectangleHitbox();
-  final sprites = Queue<Sprite>();
-  late Timer interval;
+  final _sprites = Queue<Sprite>();
+  late Timer animationTimer;
   double _offset = 0;
   int _offsetDest = 0;
   bool _isMovingForward = false;
@@ -22,20 +24,20 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 3; i++) {
-      sprites.add(await Sprite.load("player/player$i.png"));
+      _sprites.add(await Sprite.load("player/player$i.png"));
     }
-    sprite = sprites.first;
+    sprite = _sprites.first;
     anchor = Anchor.center;
 
     _hitbox.debugColor = Colors.red;
     _hitbox.debugMode = true;
 
-    interval = Timer(
+    animationTimer = Timer(
       0.2,
       onTick: () {
-        if (sprites.isNotEmpty) {
-          sprites.add(sprites.removeFirst());
-          sprite = sprites.first;
+        if (_sprites.isNotEmpty) {
+          _sprites.add(_sprites.removeFirst());
+          sprite = _sprites.first;
         }
       },
       repeat: true,
@@ -56,6 +58,8 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
 
   @override
   void update(double dt) {
+    position.x = gameRef.size.x / 2 + _offset * 330 * gameRef.scale;
+
     if (!gameRef.isPlaying) {
       super.update(dt);
       return;
@@ -63,10 +67,14 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
 
     if (_isMovingForward && position.y > gameRef.size.y * 0.1) {
       position.y -= _forwardSpeed * dt * gameRef.scale;
+      gameRef.milage += dt * _forwardSpeed;
+      milageChangeNotifier.notify();
     } else if (position.y < _getDefaultPosition().y) {
       position.y += _backwardSpeed * dt * gameRef.scale;
     } else {
       position.y = _getDefaultPosition().y;
+      gameRef.milage += dt * _backwardSpeed;
+      milageChangeNotifier.notify();
     }
 
     if (_offsetDest != _offset) {
@@ -82,10 +90,9 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
         }
       }
     }
-    position.x = gameRef.size.x / 2 + _offset * 330 * gameRef.scale;
 
     if (_isMovingForward || position.y >= _getDefaultPosition().y) {
-      interval.update(dt);
+      animationTimer.update(dt);
     }
     super.update(dt);
   }
@@ -93,7 +100,7 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   @override
   void onGameResize(Vector2 size) {
     children.whereType<_PositionHitbox>().firstOrNull
-      ?..size = Vector2(super.size.x * 0.5, super.size.y)
+      ?..size = Vector2(super.size.x * 0.5, super.size.y * 0.9)
       ..position = super.size / 2;
     super.onGameResize(size);
   }
@@ -127,8 +134,7 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
-    print("collision");
-    parent?.add(GameOver());
+    gameRef.overlays.add("game_over");
     gameRef.isPlaying = false;
     super.onCollisionStart(intersectionPoints, other);
   }

@@ -39,4 +39,10 @@ class Obstacle extends ScalableSprite {
       ..position = super.size / 2;
     super.onGameResize(size);
   }
+
+  @override
+  void onRemove() {
+    if (parent != null) removeFromParent();
+    super.onRemove();
+  }
 }

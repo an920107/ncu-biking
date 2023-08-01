@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:ncu_biking/controllers/playing/obstacle/obstacle.dart';
@@ -10,24 +11,26 @@ class Person extends Obstacle {
     super.relativeX = 0.4,
   });
 
-  final sprites = Queue<Sprite>();
-  late Timer interval;
+  final _sprites = Queue<Sprite>();
+  final bool _rightForward = Random().nextBool();
+  final double _speed = 500;
+  late Timer _animationTimer;
 
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 4; i++) {
-      sprites.add(await Sprite.load("person/person_v2-$i.png"));
+      _sprites.add(await Sprite.load("person/person_v2-$i.png"));
     }
-    sprite = sprites.first;
+    sprite = _sprites.first;
     anchor = Anchor.center;
-    position = Vector2(gameRef.size.x / 2, gameRef.size.x / 2);
+    if (_rightForward) flipHorizontally();
 
-    interval = Timer(
+    _animationTimer = Timer(
       0.25,
       onTick: () {
-        if (sprites.isNotEmpty) {
-          sprites.add(sprites.removeFirst());
-          sprite = sprites.first;
+        if (_sprites.isNotEmpty) {
+          _sprites.add(_sprites.removeFirst());
+          sprite = _sprites.first;
         }
       },
       repeat: true,
@@ -36,8 +39,26 @@ class Person extends Obstacle {
   }
 
   @override
+  void onMount() {
+    position = Vector2(
+      gameRef.size.x / 2 + (_rightForward ? -1 : 1) * 520 * gameRef.scale,
+      size.y + Random().nextInt((gameRef.size.y / 2 - size.y).toInt()),
+    );
+    super.onMount();
+  }
+
+  @override
   void update(double dt) {
-    interval.update(dt);
+    if (gameRef.isPlaying) {
+      position.y += gameRef.baseSpeed * dt * gameRef.scale;
+      position.x += (_rightForward ? 1 : -1) * _speed * dt * gameRef.scale;
+      if (position.y > gameRef.size.y + size.y ||
+          position.x < gameRef.size.x / 2 - 550 * gameRef.scale ||
+          position.x > gameRef.size.x / 2 + 550 * gameRef.scale) {
+        removeFromParent();
+      }
+    }
+    _animationTimer.update(dt);
     super.update(dt);
   }
 }

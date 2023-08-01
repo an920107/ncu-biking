@@ -6,13 +6,13 @@ class Road extends ScalableSprite {
     super.coefficient = 1.0,
     required super.sprite,
     this.linked,
-    this.onArrived,
-  });
+    dynamic Function()? onArrived,
+  }) : _onArrived = onArrived;
 
-  final Function()? onArrived;
+  final Function()? _onArrived;
   Road? linked;
 
-  final double _speed = 500;
+  late final double _speed = gameRef.baseSpeed;
 
   @override
   void update(double dt) {
@@ -20,7 +20,7 @@ class Road extends ScalableSprite {
       if (linked == null) {
         position.y += dt * _speed * gameRef.scale;
         if (position.y > gameRef.size.y + size.y) {
-          if (onArrived != null) onArrived!.call();
+          if (_onArrived != null) _onArrived!.call();
         }
       } else {
         position.y = linked!.y - linked!.size.y + dt * _speed * gameRef.scale;

@@ -1,5 +1,5 @@
 name: ncu_biking
-description: A new Flutter project.
+description: 一起繞著環校道路騎腳踏車吧！
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -71,7 +71,6 @@ flutter:
     - assets/images/person/
     - assets/images/player/
     - assets/images/road/
-    - assets/images/road_test/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -87,7 +86,7 @@ flutter:
   fonts:
     - family: iansui
       fonts:
-        - asset: assets/fonts/Coriandrum_sativum.ttf
+        - asset: assets/fonts/iansui.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
