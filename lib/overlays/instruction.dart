@@ -50,7 +50,7 @@ class Instruction extends StatelessWidget {
                 Positioned(
                   top: 600 * game.scale,
                   child: Text(
-                    "利用「方向鍵」控制角色\n避免撞到障礙物",
+                    "利用鍵盤或螢幕方向鍵移動\n閃避路上的各種障礙物",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: const Color.fromARGB(255, 255, 255, 255),
