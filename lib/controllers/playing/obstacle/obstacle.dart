@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:ncu_biking/controllers/scalable_sprite.dart';
 
 class Obstacle extends ScalableSprite {
@@ -17,8 +16,8 @@ class Obstacle extends ScalableSprite {
 
   @override
   FutureOr<void> onLoad() {
-    _hitbox.debugColor = Colors.green;
-    _hitbox.debugMode = true;
+    // _hitbox.debugColor = Colors.green;
+    // _hitbox.debugMode = true;
     add(PositionComponent(
       anchor: Anchor.center,
       children: [_hitbox],

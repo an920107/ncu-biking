@@ -24,13 +24,13 @@ class Playing extends Component with HasGameRef<Main> {
   /// 每 0.1 秒有多少機率生成
   final _frequencyTable = <List<double>>[
     [0.05, -1, -1, -1],
-    [0.06, 0.05, -1, -1],
+    [0.06, 0.04, -1, -1],
     [0.06, 0.03, 0.05, -1],
     [0.05, 0.03, 0.06, 0.03],
   ];
 
   /// 各障礙物出現的冷卻時間
-  final _coldDownTable = <double>[2, 3, 3, 4];
+  final _coldDownTable = <double>[2, 3.5, 3, 4];
 
   /// 各障礙物出現的剩餘冷卻時間
   final _coldDown = <double>[0, 0, 0, 0];
@@ -67,14 +67,17 @@ class Playing extends Component with HasGameRef<Main> {
 
   @override
   void onMount() {
+    gameRef.overlays.add("instruction");
+
     stage = 0;
     for (int i = 0; i < _coldDown.length; i++) {
       _coldDown[i] = 0;
     }
-    gameRef.isPlaying = true;
+    // gameRef.isPlaying = true;
     gameRef.accumulatedTime = 0.0;
     gameRef.milage = 0.0;
     gameRef.overlays.add("milage_hud");
+
     super.onMount();
   }
 

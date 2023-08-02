@@ -7,7 +7,7 @@ import 'package:ncu_biking/controllers/playing/obstacle/obstacle.dart';
 
 class Person extends Obstacle {
   Person({
-    super.coefficient = 0.1,
+    super.coefficient = 0.08,
     super.relativeX = 0.4,
   });
 

@@ -46,6 +46,19 @@ class GameOver extends StatelessWidget {
                     ),
                   ),
                 ),
+                Positioned(
+                  top: 660 * game.scale,
+                  child: Text(
+                    "　　　　　　《點擊任意區域繼續》",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color.fromARGB(150, 255, 255, 255),
+                      fontFamily: "iansui",
+                      fontSize: 40 * game.scale,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
               ],
             ),
           ],

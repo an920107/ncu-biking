@@ -29,8 +29,8 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
     sprite = _sprites.first;
     anchor = Anchor.center;
 
-    _hitbox.debugColor = Colors.red;
-    _hitbox.debugMode = true;
+    // _hitbox.debugColor = Colors.red;
+    // _hitbox.debugMode = true;
 
     animationTimer = Timer(
       0.2,
@@ -110,18 +110,18 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
     if (gameRef.isPlaying) {
       if (event is RawKeyDownEvent) {
         if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
-          if (_offsetDest == _offset && _offsetDest > -1) _offsetDest--;
+          _leftKeyDown();
         }
         if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
-          if (_offsetDest == _offset && _offsetDest < 1) _offsetDest++;
+          _rightKeyDown();
         }
         if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
-          _isMovingForward = true;
+          _upKeyDown();
         }
       } else if (event is RawKeyUpEvent) {
         switch (event.logicalKey) {
           case LogicalKeyboardKey.arrowUp:
-            _isMovingForward = false;
+            _upKeyUp();
             break;
           default:
             break;
@@ -137,6 +137,22 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
     gameRef.overlays.add("game_over");
     gameRef.isPlaying = false;
     super.onCollisionStart(intersectionPoints, other);
+  }
+
+  void _leftKeyDown() {
+    if (_offsetDest == _offset && _offsetDest > -1) _offsetDest--;
+  }
+
+  void _rightKeyDown() {
+    if (_offsetDest == _offset && _offsetDest < 1) _offsetDest++;
+  }
+
+  void _upKeyDown() {
+    _isMovingForward = true;
+  }
+
+  void _upKeyUp() {
+    _isMovingForward = false;
   }
 
   Vector2 _getDefaultPosition() {

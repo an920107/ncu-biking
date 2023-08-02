@@ -15,16 +15,21 @@ class Roads extends Component with HasGameRef<Main> {
         sprite: await Sprite.load("road/road$i.png"),
         linked: roads.lastOrNull,
         onArrived: () {
+          remove(roads.first);
           roads.first.linked = roads.last;
           roads.add(roads.removeFirst());
           roads.first.linked = null;
           roads.first.y = gameRef.size.y;
+          add(roads.elementAt(1));
         },
       )
         ..anchor = Anchor.bottomCenter
         ..x = gameRef.size.x / 2
         ..y = gameRef.size.y);
-      add(roads.last);
+
+      if (i < 2) {
+        add(roads.last);
+      }
     }
     return super.onLoad();
   }
