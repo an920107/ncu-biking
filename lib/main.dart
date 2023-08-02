@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Route, Title;
+import 'package:ncu_biking/http_service.dart';
 import 'package:ncu_biking/overlays/game_over.dart';
 import 'package:ncu_biking/overlays/instruction.dart';
 import 'package:ncu_biking/overlays/joystick.dart';
@@ -12,14 +13,17 @@ import 'package:ncu_biking/overlays/start_game.dart';
 import 'package:ncu_biking/screens/playing.dart';
 import 'package:ncu_biking/screens/title.dart';
 import 'package:provider/provider.dart';
-import 'package:url_strategy/url_strategy.dart';
 
 late final GameResizeNotifier gameResizeNotifier;
 late final MilageChangeNotifier milageChangeNotifier;
 
 Future<void> main() async {
+  String? token = Uri.base.queryParameters["token"];
+  if (token == "undefined" || token == "null") {
+    token = null;
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
 
   gameResizeNotifier = GameResizeNotifier();
   milageChangeNotifier = MilageChangeNotifier();
@@ -33,7 +37,7 @@ Future<void> main() async {
       title: "NCU Biking",
       home: Scaffold(
         body: GameWidget(
-          game: Main(),
+          game: Main(token: token),
           overlayBuilderMap: {
             "start_game": (BuildContext context, Main game) =>
                 StartGame(game: game),
@@ -57,15 +61,21 @@ class Main extends FlameGame
         HasKeyboardHandlerComponents,
         HasCollisionDetection,
         HasTappablesBridge {
+
+  Main({this.token});
+
+  final String? token;
+
   final _backgroundSprite = SpriteComponent();
 
   late final RouterComponent router;
+  final httpService = HttpService();
   final double coverWidth = 1120, coverHeight = 2136;
   final double backgroundWidth = 1920, backgroundHeight = 961;
   double scale = 1.0;
   bool isPlaying = false;
 
-  final double baseSpeed = 450;
+  final double baseSpeed = 500;
   final double milageCoefficient = 5E4;
   double milage = 0.0;
   double accumulatedTime = 0.0;

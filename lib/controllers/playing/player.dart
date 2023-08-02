@@ -3,7 +3,6 @@ import 'dart:collection';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ncu_biking/controllers/scalable_sprite.dart';
 import 'package:ncu_biking/main.dart';

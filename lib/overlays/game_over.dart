@@ -12,6 +12,9 @@ class GameOver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    game.httpService.get("https://api.game.ncufresh.ncu.edu.tw/user/nickname").then((value) {
+      print(value.data);
+    });
     return GestureDetector(
       onTap: () {
         game.overlays.removeAll(game.overlays.activeOverlays.toList());
