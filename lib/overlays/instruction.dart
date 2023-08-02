@@ -15,6 +15,7 @@ class Instruction extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         game.overlays.remove("instruction");
+        game.overlays.add("joystick");
         game.isPlaying = true;
       },
       child: Consumer<GameResizeNotifier>(
