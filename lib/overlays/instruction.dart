@@ -63,10 +63,10 @@ class Instruction extends StatelessWidget {
                 Positioned(
                   top: 900 * game.scale,
                   child: Text(
-                    "在風和日麗的午後\n在環校道路上騎著腳踏車\n是多麼愜意的一件事...",
+                    "風和日麗的午後\n在環校道路上騎著腳踏車\n是多麼愜意的一件事...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: const Color.fromARGB(180, 255, 255, 255),
+                      color: const Color.fromARGB(160, 255, 255, 255),
                       fontFamily: "iansui",
                       fontSize: 40 * game.scale,
                       fontStyle: FontStyle.italic,
@@ -80,7 +80,7 @@ class Instruction extends StatelessWidget {
                     "《點擊任意區域開始遊戲》",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: const Color.fromARGB(180, 255, 255, 255),
+                      color: const Color.fromARGB(160, 255, 255, 255),
                       fontFamily: "iansui",
                       fontSize: 40 * game.scale,
                       height: 1.3,
