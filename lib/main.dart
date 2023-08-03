@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 
 late final GameResizeNotifier gameResizeNotifier;
 late final MilageChangeNotifier milageChangeNotifier;
-late final JoystickChangeNotifier joystickChangeNotifier;
 
 Future<void> main() async {
   String? token = Uri.base.queryParameters["token"];
@@ -31,13 +30,11 @@ Future<void> main() async {
 
   gameResizeNotifier = GameResizeNotifier();
   milageChangeNotifier = MilageChangeNotifier();
-  joystickChangeNotifier = JoystickChangeNotifier();
 
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider.value(value: gameResizeNotifier),
       ChangeNotifierProvider.value(value: milageChangeNotifier),
-      ChangeNotifierProvider.value(value: joystickChangeNotifier),
     ],
     child: MaterialApp(
       title: "NCU Biking",
@@ -90,6 +87,8 @@ class Main extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
+    overlays.add("loading_icon");
+
     add(_backgroundSprite
       ..sprite = await Sprite.load("cover/background.png")
       ..anchor = Anchor.center);
@@ -141,29 +140,5 @@ class GameResizeNotifier extends ChangeNotifier {
 class MilageChangeNotifier extends ChangeNotifier {
   void notify() {
     Future.delayed(Duration.zero, () => notifyListeners());
-  }
-}
-
-enum JoystickKey {
-  none,
-  up,
-  left,
-  right;
-}
-
-enum JoystickKeyEvent {
-  none,
-  down,
-  up;
-}
-
-class JoystickChangeNotifier extends ChangeNotifier {
-  JoystickKey key = JoystickKey.none;
-  JoystickKeyEvent event = JoystickKeyEvent.none;
-
-  void notify(JoystickKey key, JoystickKeyEvent event) {
-    this.key = key;
-    this.event = event;
-    notifyListeners();
   }
 }
