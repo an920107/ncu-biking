@@ -10,11 +10,11 @@ class Title extends Component with HasGameRef<Main> {
 
   @override
   FutureOr<void> onLoad() async {
-    _cover.sprite = await Sprite.load("cover/begin.png");
+    _cover.sprite = gameRef.spriteManager.cover;
     add(_cover);
 
     _startButton
-      ..button = await Sprite.load("cover/start.png")
+      ..button = gameRef.spriteManager.start
       ..buttonDown = null
       ..onPressed = () {
         gameRef.router.pushNamed("playing");

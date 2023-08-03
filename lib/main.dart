@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Route, Title;
 import 'package:ncu_biking/http_service.dart';
+import 'package:ncu_biking/image_manager.dart';
 import 'package:ncu_biking/overlays/game_over.dart';
 import 'package:ncu_biking/overlays/instruction.dart';
 import 'package:ncu_biking/overlays/joystick.dart';
@@ -14,7 +15,7 @@ import 'package:ncu_biking/overlays/start_game.dart';
 import 'package:ncu_biking/screens/loading.dart';
 import 'package:ncu_biking/screens/playing.dart';
 import 'package:ncu_biking/screens/title.dart';
-import 'package:ncu_biking/sprites_manager.dart';
+import 'package:ncu_biking/sprite_manager.dart';
 import 'package:provider/provider.dart';
 
 late final GameResizeNotifier gameResizeNotifier;
@@ -73,7 +74,8 @@ class Main extends FlameGame
   final _backgroundSprite = SpriteComponent();
 
   late final RouterComponent router;
-  late final SpritesManager sprites;
+  late final SpriteManager spriteManager;
+  late final ImageManager imageManager;
   final httpService = HttpService();
   final double coverWidth = 1120, coverHeight = 2136;
   final double backgroundWidth = 1920, backgroundHeight = 961;

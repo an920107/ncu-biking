@@ -12,7 +12,7 @@ class Roads extends Component with HasGameRef<Main> {
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 4; i++) {
       roads.add(Road(
-        sprite: await Sprite.load("road/road$i.png"),
+        sprite: gameRef.spriteManager.roads[i],
         linked: roads.lastOrNull,
         onArrived: () {
           remove(roads.first);

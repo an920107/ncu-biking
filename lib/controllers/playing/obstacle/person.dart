@@ -19,7 +19,7 @@ class Person extends Obstacle {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 4; i++) {
-      _sprites.add(await Sprite.load("person/person_v2-$i.png"));
+      _sprites.add(gameRef.spriteManager.persons[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;

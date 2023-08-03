@@ -30,8 +30,8 @@ class Instruction extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset(
-                  "assets/images/cover/instruction.png",
+                Image.memory(
+                  game.imageManager.instruction,
                   width: game.coverWidth * game.scale * 0.8,
                 ),
                 Positioned(

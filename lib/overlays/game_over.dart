@@ -32,8 +32,8 @@ class GameOver extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset(
-                  "assets/images/cover/game_over.png",
+                Image.memory(
+                  game.imageManager.gameOver,
                   width: game.coverWidth * game.scale * 0.7,
                 ),
                 Positioned(

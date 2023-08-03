@@ -20,7 +20,7 @@ class Bird extends Obstacle {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 4; i++) {
-      _sprites.add(await Sprite.load("bird/bird$i.png"));
+      _sprites.add(gameRef.spriteManager.birds[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;

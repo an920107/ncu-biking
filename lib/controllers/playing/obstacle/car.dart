@@ -12,7 +12,7 @@ class Car extends Obstacle {
 
   @override
   FutureOr<void> onLoad() async {
-    sprite = await Sprite.load("car/car${Random().nextInt(3)}.png");
+    sprite = gameRef.spriteManager.cars[Random().nextInt(3)];
     anchor = Anchor.center;
     angle = pi / 180 * 90;
     return super.onLoad();

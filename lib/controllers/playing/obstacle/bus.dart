@@ -18,7 +18,7 @@ class Bus extends Obstacle {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 6; i++) {
-      _sprites.add(await Sprite.load("bus/bus$i.png"));
+      _sprites.add(gameRef.spriteManager.buses[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;

@@ -23,7 +23,7 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 3; i++) {
-      _sprites.add(await Sprite.load("player/player$i.png"));
+      _sprites.add(gameRef.spriteManager.players[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;
