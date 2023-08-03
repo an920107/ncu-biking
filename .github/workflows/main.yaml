@@ -1,0 +1,17 @@
+name: Github Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+            channel: 'stable'
+      - uses: erickzanardo/flutter-gh-pages@v7
+        with:
+            targetBranch: pages
+            baseHref: /ncu-biking/

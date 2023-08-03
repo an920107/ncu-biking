@@ -64,7 +64,7 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
       return;
     }
 
-    if (_isMovingForward && position.y > gameRef.size.y * 0.1) {
+    if (_isMovingForward && position.y > gameRef.size.y * 0.15) {
       position.y -= _forwardSpeed * dt * gameRef.scale;
       gameRef.milage += dt * _forwardSpeed;
       milageChangeNotifier.notify();
@@ -108,18 +108,26 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (gameRef.isPlaying) {
       if (event is RawKeyDownEvent) {
-        if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
-          _leftKeyDown();
-        }
-        if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
-          _rightKeyDown();
-        }
-        if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
-          _upKeyDown();
+        switch (event.logicalKey) {
+          case LogicalKeyboardKey.arrowLeft:
+          case LogicalKeyboardKey.keyA:
+            _leftKeyDown();
+            break;
+          case LogicalKeyboardKey.arrowRight:
+          case LogicalKeyboardKey.keyD:
+            _rightKeyDown();
+            break;
+          case LogicalKeyboardKey.arrowUp:
+          case LogicalKeyboardKey.keyW:
+            _upKeyDown();
+            break;
+          default:
+            break;
         }
       } else if (event is RawKeyUpEvent) {
         switch (event.logicalKey) {
           case LogicalKeyboardKey.arrowUp:
+          case LogicalKeyboardKey.keyW:
             _upKeyUp();
             break;
           default:

@@ -15,6 +15,7 @@ class Instruction extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         game.overlays.remove("instruction");
+        game.overlays.add("joystick");
         game.isPlaying = true;
       },
       child: Consumer<GameResizeNotifier>(
@@ -49,7 +50,7 @@ class Instruction extends StatelessWidget {
                 Positioned(
                   top: 600 * game.scale,
                   child: Text(
-                    "利用「方向鍵」控制角色\n避免撞到障礙物",
+                    "利用鍵盤或螢幕方向鍵移動\n閃避路上的各種障礙物",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -62,10 +63,10 @@ class Instruction extends StatelessWidget {
                 Positioned(
                   top: 900 * game.scale,
                   child: Text(
-                    "在風和日麗的午後\n在環校道路上騎著腳踏車\n是多麼愜意的一件事...",
+                    "風和日麗的午後\n在環校道路上騎著腳踏車\n是多麼愜意的一件事...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: const Color.fromARGB(180, 255, 255, 255),
+                      color: const Color.fromARGB(160, 255, 255, 255),
                       fontFamily: "iansui",
                       fontSize: 40 * game.scale,
                       fontStyle: FontStyle.italic,
@@ -79,7 +80,7 @@ class Instruction extends StatelessWidget {
                     "《點擊任意區域開始遊戲》",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: const Color.fromARGB(180, 255, 255, 255),
+                      color: const Color.fromARGB(160, 255, 255, 255),
                       fontFamily: "iansui",
                       fontSize: 40 * game.scale,
                       height: 1.3,

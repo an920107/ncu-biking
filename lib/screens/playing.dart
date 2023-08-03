@@ -16,6 +16,7 @@ import 'package:ncu_biking/main.dart';
 /// - Bird, 斜向後移動
 
 class Playing extends Component with HasGameRef<Main> {
+  final double _updateTime = 0.1;
   int stage = 0;
 
   /// 使 [stage] 增加所需要的總里程數
@@ -41,7 +42,7 @@ class Playing extends Component with HasGameRef<Main> {
   FutureOr<void> onLoad() async {
     addAll([Roads(), Player()]);
     _generatingTimer = Timer(
-      0.1,
+      _updateTime,
       onTick: () {
         if (_toGenerate(0)) {
           add(Car());
@@ -58,6 +59,9 @@ class Playing extends Component with HasGameRef<Main> {
         if (_toGenerate(3)) {
           add(Bird());
           _coldDownReset(3);
+        }
+        for (int i = 0; i < _coldDown.length; i++) {
+          _coldDown[i] -= _updateTime;
         }
       },
       repeat: true,
@@ -77,7 +81,6 @@ class Playing extends Component with HasGameRef<Main> {
     gameRef.accumulatedTime = 0.0;
     gameRef.milage = 0.0;
     gameRef.overlays.add("milage_hud");
-
     super.onMount();
   }
 
@@ -88,9 +91,6 @@ class Playing extends Component with HasGameRef<Main> {
       gameRef.accumulatedTime += dt;
       if (gameRef.milage / gameRef.milageCoefficient >= _stageTable[stage]) {
         stage++;
-      }
-      for (int i = 0; i < _coldDown.length; i++) {
-        _coldDown[i] -= dt;
       }
     }
     super.update(dt);

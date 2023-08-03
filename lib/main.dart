@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 
 late final GameResizeNotifier gameResizeNotifier;
 late final MilageChangeNotifier milageChangeNotifier;
+late final JoystickChangeNotifier joystickChangeNotifier;
 
 Future<void> main() async {
   String? token = Uri.base.queryParameters["token"];
@@ -30,11 +31,13 @@ Future<void> main() async {
 
   gameResizeNotifier = GameResizeNotifier();
   milageChangeNotifier = MilageChangeNotifier();
+  joystickChangeNotifier = JoystickChangeNotifier();
 
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider.value(value: gameResizeNotifier),
       ChangeNotifierProvider.value(value: milageChangeNotifier),
+      ChangeNotifierProvider.value(value: joystickChangeNotifier),
     ],
     child: MaterialApp(
       title: "NCU Biking",
