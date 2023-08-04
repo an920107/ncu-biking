@@ -26,7 +26,7 @@ class LoadingIcon extends StatelessWidget {
             height: squareSize,
             constraints: const BoxConstraints(
                 maxHeight: squareSizeLimit, maxWidth: squareSizeLimit),
-            child: Image.asset("assets/images/cover/favicon.gif"),
+            child: Image.memory(game.faviconImage),
           ),
           Text(
             "Loading...",

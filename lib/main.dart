@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Route, Title;
+import 'package:flutter/services.dart';
 import 'package:ncu_biking/http_service.dart';
 import 'package:ncu_biking/image_manager.dart';
 import 'package:ncu_biking/overlays/game_over.dart';
@@ -74,6 +75,7 @@ class Main extends FlameGame
 
   final _backgroundSprite = SpriteComponent();
 
+  late final Uint8List faviconImage;
   late final RouterComponent router;
   late final SpriteManager spriteManager;
   late final ImageManager imageManager;
@@ -90,9 +92,19 @@ class Main extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
-    add(_backgroundSprite
-      ..sprite = await Sprite.load("cover/background.png")
-      ..anchor = Anchor.center);
+    await Future.wait([
+      () async {
+        add(_backgroundSprite
+          ..sprite = await Sprite.load("cover/background.png")
+          ..anchor = Anchor.center);
+      }(),
+      () async {
+        faviconImage =
+            (await rootBundle.load("assets/images/cover/favicon.gif"))
+                .buffer
+                .asUint8List();
+      }(),
+    ]);
 
     add(router = RouterComponent(
       initialRoute: "loading",

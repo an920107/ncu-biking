@@ -8,14 +8,16 @@ import 'package:ncu_biking/sprite_manager.dart';
 class Loading extends Component with HasGameRef<Main> {
   @override
   FutureOr<void> onLoad() async {
-    SpriteManager.load().then((value) {
-      gameRef.spriteManager = value;
-      ImageManager.load().then((value) {
-        gameRef.imageManager = value;
-        gameRef.router.pushReplacementNamed("title");
-        gameRef.overlays.clear();
-      });
-    });
+    await Future.wait([
+      () async {
+        gameRef.spriteManager = await SpriteManager.load();
+      }(),
+      () async {
+        gameRef.imageManager = await ImageManager.load();
+      }(),
+    ]);
+    gameRef.overlays.clear();
+    gameRef.router.pushReplacementNamed("title");
     return super.onLoad();
   }
 }
