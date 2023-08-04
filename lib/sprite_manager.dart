@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 
 abstract class SpriteManager {
-  // late final Sprite background;
   late final Sprite cover;
   late final Sprite start;
   late final Sprite playerCrashed;
@@ -13,32 +12,56 @@ abstract class SpriteManager {
   late final List<Sprite> roads;
 
   static Future<SpriteManager> load() async {
-    return _SpriteManager()
-      // ..background = await Sprite.load("cover/background.png")
-      ..cover = await Sprite.load("cover/begin.png")
-      ..start = await Sprite.load("cover/start.png")
-      ..playerCrashed = await Sprite.load("player/be_crashed.png")
-      ..players = await _generateSpritesList(
-          3, (index) => Sprite.load("player/player$index.png"))
-      ..birds = await _generateSpritesList(
-          4, (index) => Sprite.load("bird/bird$index.png"))
-      ..cars = await _generateSpritesList(
-          3, (index) => Sprite.load("car/car$index.png"))
-      ..buses = await _generateSpritesList(
-          6, (index) => Sprite.load("bus/bus$index.png"))
-      ..persons = await _generateSpritesList(
-          4, (index) => Sprite.load("person/person_v2-$index.png"))
-      ..roads = await _generateSpritesList(
-          4, (index) => Sprite.load("road/road$index.png"));
+    final manager = _SpriteManager();
+
+    await Future.wait([
+      () async {
+        manager.cover = await Sprite.load("cover/begin.png");
+      }(),
+      () async {
+        manager.start = await Sprite.load("cover/start.png");
+      }(),
+      () async {
+        manager.playerCrashed = await Sprite.load("player/be_crashed.png");
+      }(),
+      () async {
+        manager.players = await _generateSpritesList(
+            3, (index) => Sprite.load("player/player$index.png"));
+      }(),
+      () async {
+        manager.birds = await _generateSpritesList(
+            4, (index) => Sprite.load("bird/bird$index.png"));
+      }(),
+      () async {
+        manager.cars = await _generateSpritesList(
+            3, (index) => Sprite.load("car/car$index.png"));
+      }(),
+      () async {
+        manager.buses = await _generateSpritesList(
+            6, (index) => Sprite.load("bus/bus$index.png"));
+      }(),
+      () async {
+        manager.persons = await _generateSpritesList(
+            4, (index) => Sprite.load("person/person_v2-$index.png"));
+      }(),
+      () async {
+        manager.roads = await _generateSpritesList(
+            4, (index) => Sprite.load("road/road$index.png"));
+      }(),
+    ]);
+
+    return manager;
   }
 
   static Future<List<Sprite>> _generateSpritesList(
       int length, Future<Sprite> Function(int index) generator) async {
-    final list = <Sprite>[];
-    for (int i = 0; i < length; i++) {
-      list.add(await generator.call(i));
-    }
-    return List.unmodifiable(list);
+    final List<Sprite?> spriteList = List.filled(length, null);
+    await Future.wait(List.generate(
+        length,
+        (index) => () async {
+              spriteList[index] = await generator.call(index);
+            }()));
+    return List.unmodifiable(spriteList);
   }
 }
 
