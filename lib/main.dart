@@ -56,6 +56,7 @@ Future<void> main() async {
             "game_over": (BuildContext context, Main game) =>
                 GameOver(game: game),
           },
+          initialActiveOverlays: const ["loading_icon"],
         ),
       ),
     ),
@@ -89,8 +90,6 @@ class Main extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
-    overlays.add("loading_icon");
-
     add(_backgroundSprite
       ..sprite = await Sprite.load("cover/background.png")
       ..anchor = Anchor.center);
