@@ -48,15 +48,15 @@ class Instruction extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 600 * game.scale,
+                  top: 510 * game.scale,
                   child: Text(
-                    "利用鍵盤或螢幕方向鍵移動\n閃避路上的各種障礙物",
+                    "利用鍵盤或螢幕方向鍵移動\n　↑　：向前加速\n←　→：左右移動\n閃避路上的各種障礙物",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       fontFamily: "iansui",
                       fontSize: 50 * game.scale,
-                      height: 1.3,
+                      height: 1.4,
                     ),
                   ),
                 ),

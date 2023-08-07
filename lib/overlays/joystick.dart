@@ -33,13 +33,13 @@ class Joystick extends StatelessWidget {
                   ),
                   {LogicalKeyboardKey.arrowLeft},
                 ),
-                iconSize: 200 * game.scale,
+                iconSize: 300 * game.scale,
                 icon: const Icon(
                   Icons.arrow_circle_left_outlined,
                   color: Color.fromARGB(80, 0, 0, 0),
                 ),
               ),
-              SizedBox(width: 100 * game.scale),
+              SizedBox(width: 80 * game.scale),
               GestureDetector(
                 onTapDown: (detial) => game.onKeyEvent(
                   const RawKeyDownEvent(
@@ -65,14 +65,14 @@ class Joystick extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {},
-                  iconSize: 200 * game.scale,
+                  iconSize: 300 * game.scale,
                   icon: const Icon(
                     Icons.arrow_circle_up,
                     color: Color.fromARGB(80, 0, 0, 0),
                   ),
                 ),
               ),
-              SizedBox(width: 100 * game.scale),
+              SizedBox(width: 80 * game.scale),
               IconButton(
                 onPressed: () => game.onKeyEvent(
                   const RawKeyDownEvent(
@@ -85,7 +85,7 @@ class Joystick extends StatelessWidget {
                   ),
                   {LogicalKeyboardKey.arrowRight},
                 ),
-                iconSize: 200 * game.scale,
+                iconSize: 300 * game.scale,
                 icon: const Icon(
                   Icons.arrow_circle_right_outlined,
                   color: Color.fromARGB(80, 0, 0, 0),
