@@ -80,6 +80,7 @@ class Playing extends Component with HasGameRef<Main> {
     // gameRef.isPlaying = true;
     gameRef.accumulatedTime = 0.0;
     gameRef.milage = 0.0;
+    gameRef.crashed = null;
     gameRef.overlays.add("milage_hud");
     super.onMount();
   }

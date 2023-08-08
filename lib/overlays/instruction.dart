@@ -54,25 +54,21 @@ class _InstructionState extends State<Instruction> {
                   child: Text(
                     "遊戲說明",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      fontFamily: "iansui",
-                      fontSize: 120 * widget.game.scale,
-                      fontWeight: FontWeight.w900,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 120 * widget.game.scale,
+                          fontWeight: FontWeight.w900,
+                        ),
                   ),
                 ),
                 Positioned(
-                  top: 510 * widget.game.scale,
+                  top: 520 * widget.game.scale,
                   child: Text(
                     "利用鍵盤或螢幕方向鍵移動\n　↑　：向前加速\n←　→：左右移動\n閃避路上的各種障礙物",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      fontFamily: "iansui",
-                      fontSize: 50 * widget.game.scale,
-                      height: 1.4,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 48 * widget.game.scale,
+                          height: 1.4,
+                        ),
                   ),
                 ),
                 Positioned(
@@ -80,13 +76,10 @@ class _InstructionState extends State<Instruction> {
                   child: Text(
                     "風和日麗的午後\n在環校道路上騎著腳踏車\n是多麼愜意的一件事...",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color.fromARGB(160, 255, 255, 255),
-                      fontFamily: "iansui",
-                      fontSize: 40 * widget.game.scale,
-                      fontStyle: FontStyle.italic,
-                      height: 1.3,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontSize: 40 * widget.game.scale,
+                          height: 1.3,
+                        ),
                   ),
                 ),
                 if (_canEscape)
@@ -95,12 +88,10 @@ class _InstructionState extends State<Instruction> {
                     child: Text(
                       "《點擊任意區域開始遊戲》",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: const Color.fromARGB(160, 255, 255, 255),
-                        fontFamily: "iansui",
-                        fontSize: 40 * widget.game.scale,
-                        height: 1.3,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 40 * widget.game.scale,
+                            height: 1.3,
+                          ),
                     ),
                   ),
               ],

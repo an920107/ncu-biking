@@ -65,12 +65,10 @@ class _GameOverState extends State<GameOver> {
                   child: Text(
                     "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\ntime: ${widget.game.accumulatedTime.toStringAsFixed(1)} s",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      fontFamily: "iansui",
-                      fontSize: 55 * widget.game.scale,
-                      height: 1.3,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 55 * widget.game.scale,
+                          height: 1.3,
+                        ),
                   ),
                 ),
                 if (_canEscape)
@@ -79,12 +77,10 @@ class _GameOverState extends State<GameOver> {
                     child: Text(
                       "　　　　　　《點擊任意區域繼續》",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: const Color.fromARGB(150, 255, 255, 255),
-                        fontFamily: "iansui",
-                        fontSize: 40 * widget.game.scale,
-                        height: 1.3,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 40 * widget.game.scale,
+                            height: 1.3,
+                          ),
                     ),
                   ),
               ],

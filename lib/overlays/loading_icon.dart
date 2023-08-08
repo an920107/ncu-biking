@@ -30,13 +30,11 @@ class LoadingIcon extends StatelessWidget {
           ),
           Text(
             "Loading...",
-            style: TextStyle(
-              color: const Color.fromARGB(255, 117, 135, 158),
-              fontFamily: "iansui",
-              fontSize: min(squareSize, squareSizeLimit) * 0.15,
-              height: 1.5,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  fontSize: min(squareSize, squareSizeLimit) * 0.15,
+                  height: 1.5,
+                  fontWeight: FontWeight.bold,
+                ),
           )
         ],
       ),

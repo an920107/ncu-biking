@@ -33,11 +33,9 @@ class MilageHud extends StatelessWidget {
           child: Consumer<MilageChangeNotifier>(
             builder: (context, value, child) => Text(
               "milage: ${(game.milage / game.milageCoefficient).toStringAsFixed(2)} km",
-              style: TextStyle(
-                color: const Color.fromARGB(255, 117, 135, 158),
-                fontFamily: "iansui",
-                fontSize: 80 * game.scale,
-              ),
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    fontSize: 80 * game.scale,
+                  ),
             ),
           ),
         ),

@@ -41,6 +41,19 @@ Future<void> main() async {
     ],
     child: MaterialApp(
       title: "NCU Biking",
+      theme: ThemeData(
+          fontFamily: "iansui",
+          iconTheme:
+              const IconThemeData(color: Color.fromARGB(255, 117, 135, 158)),
+          textTheme: const TextTheme(
+            labelLarge: TextStyle(color: Color.fromARGB(255, 117, 135, 158)),
+            bodyLarge: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+            bodyMedium: TextStyle(color: Color.fromARGB(150, 255, 255, 255)),
+            bodySmall: TextStyle(
+              color: Color.fromARGB(150, 255, 255, 255),
+              fontStyle: FontStyle.italic,
+            ),
+          )),
       home: Scaffold(
         body: GameWidget(
           game: Main(token: token),
@@ -90,7 +103,7 @@ class Main extends FlameGame
   final double milageCoefficient = 5E4;
   double milage = 0.0;
   double accumulatedTime = 0.0;
-  Obstacle? crashed = null;
+  Obstacle? crashed;
 
   @override
   FutureOr<void> onLoad() async {

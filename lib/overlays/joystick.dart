@@ -40,10 +40,22 @@ class Joystick extends StatelessWidget {
                     ),
                     {LogicalKeyboardKey.arrowLeft},
                   ),
-                  child: Icon(
-                    Icons.chevron_left,
-                    size: 150 * game.scale,
-                    color: const Color.fromARGB(255, 117, 135, 158),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.chevron_left,
+                        size: 150 * game.scale,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      Text(
+                        "Left / A",
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              fontSize: 30 * game.scale,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -67,10 +79,22 @@ class Joystick extends StatelessWidget {
                     ),
                     {LogicalKeyboardKey.arrowRight},
                   ),
-                  child: Icon(
-                    Icons.chevron_right,
-                    size: 150 * game.scale,
-                    color: const Color.fromARGB(255, 117, 135, 158),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.chevron_right,
+                        size: 150 * game.scale,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      Text(
+                        "Right / D",
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              fontSize: 30 * game.scale,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -105,82 +129,25 @@ class Joystick extends StatelessWidget {
                     ),
                     {LogicalKeyboardKey.arrowUp},
                   ),
-                  child: Icon(
-                    Icons.speed,
-                    size: 150 * game.scale,
-                    color: const Color.fromARGB(255, 117, 135, 158),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.speed,
+                        size: 150 * game.scale,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      Text(
+                        "Up / W",
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              fontSize: 30 * game.scale,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              // IconButton(
-              //   onPressed: () => game.onKeyEvent(
-              //     const RawKeyDownEvent(
-              //       data: RawKeyEventDataWeb(
-              //         code: "ArrowLeft",
-              //         key: "ArrowLeft",
-              //         metaState: 0,
-              //         keyCode: 37,
-              //       ),
-              //     ),
-              //     {LogicalKeyboardKey.arrowLeft},
-              //   ),
-              //   iconSize: 250 * game.scale,
-              //   icon: const Icon(
-              //     Icons.chevron_left,
-              //     color: Color.fromARGB(80, 0, 0, 0),
-              //   ),
-              // ),
-              // IconButton(
-              //   onPressed: () => game.onKeyEvent(
-              //     const RawKeyDownEvent(
-              //       data: RawKeyEventDataWeb(
-              //         code: "ArrowRight",
-              //         key: "ArrowRight",
-              //         metaState: 0,
-              //         keyCode: 39,
-              //       ),
-              //     ),
-              //     {LogicalKeyboardKey.arrowRight},
-              //   ),
-              //   iconSize: 250 * game.scale,
-              //   icon: const Icon(
-              //     Icons.chevron_right,
-              //     color: Color.fromARGB(80, 0, 0, 0),
-              //   ),
-              // ),
-              // SizedBox(width: 100 * game.scale),
-              // GestureDetector(
-              //   onTapDown: (detial) => game.onKeyEvent(
-              //     const RawKeyDownEvent(
-              //       data: RawKeyEventDataWeb(
-              //         code: "ArrowUp",
-              //         key: "ArrowUp",
-              //         metaState: 0,
-              //         keyCode: 38,
-              //       ),
-              //     ),
-              //     {LogicalKeyboardKey.arrowUp},
-              //   ),
-              //   onTapCancel: () => game.onKeyEvent(
-              //     const RawKeyUpEvent(
-              //       data: RawKeyEventDataWeb(
-              //         code: "ArrowUp",
-              //         key: "ArrowUp",
-              //         metaState: 0,
-              //         keyCode: 38,
-              //       ),
-              //     ),
-              //     {LogicalKeyboardKey.arrowUp},
-              //   ),
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     iconSize: 250 * game.scale,
-              //     icon: const Icon(
-              //       Icons.speed,
-              //       color: Color.fromARGB(80, 0, 0, 0),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
