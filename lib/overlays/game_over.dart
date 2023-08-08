@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ncu_biking/controllers/playing/obstacle.dart';
+import 'package:ncu_biking/controllers/playing/obstacle/bird.dart';
+import 'package:ncu_biking/controllers/playing/obstacle/bus.dart';
+import 'package:ncu_biking/controllers/playing/obstacle/car.dart';
+import 'package:ncu_biking/controllers/playing/obstacle/person.dart';
 import 'package:ncu_biking/main.dart';
 import 'package:provider/provider.dart';
 
@@ -58,12 +63,12 @@ class _GameOverState extends State<GameOver> {
                 Positioned(
                   top: 320 * widget.game.scale,
                   child: Text(
-                    "milage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\ntime: ${widget.game.accumulatedTime.toStringAsFixed(1)} s",
+                    "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\ntime: ${widget.game.accumulatedTime.toStringAsFixed(1)} s",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       fontFamily: "iansui",
-                      fontSize: 80 * widget.game.scale,
+                      fontSize: 55 * widget.game.scale,
                       height: 1.3,
                     ),
                   ),
@@ -88,5 +93,13 @@ class _GameOverState extends State<GameOver> {
         ),
       ),
     );
+  }
+
+  String _causeOfDeath(Obstacle? obstacle) {
+    if (obstacle is Bus) return "超速公車";
+    if (obstacle is Car) return "違停車輛";
+    if (obstacle is Person) return "白目行人";
+    if (obstacle is Bird) return "笨笨烏秋";
+    return "error";
   }
 }

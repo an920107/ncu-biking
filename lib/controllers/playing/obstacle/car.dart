@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:ncu_biking/controllers/playing/obstacle/obstacle.dart';
+import 'package:ncu_biking/controllers/playing/obstacle.dart';
 
 class Car extends Obstacle {
   Car({

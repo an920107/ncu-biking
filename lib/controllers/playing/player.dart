@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:ncu_biking/controllers/playing/obstacle.dart';
 import 'package:ncu_biking/controllers/scalable_sprite.dart';
 import 'package:ncu_biking/main.dart';
 
@@ -141,6 +142,11 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
+    try {
+      gameRef.crashed = other.parent as Obstacle;
+    } catch (e) {
+      gameRef.crashed = null;
+    }
     gameRef.overlays.add("game_over");
     gameRef.isPlaying = false;
     super.onCollisionStart(intersectionPoints, other);

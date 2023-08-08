@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Route, Title;
 import 'package:flutter/services.dart';
+import 'package:ncu_biking/controllers/playing/obstacle.dart';
 import 'package:ncu_biking/http_service.dart';
 import 'package:ncu_biking/image_manager.dart';
 import 'package:ncu_biking/overlays/game_over.dart';
@@ -89,6 +90,7 @@ class Main extends FlameGame
   final double milageCoefficient = 5E4;
   double milage = 0.0;
   double accumulatedTime = 0.0;
+  Obstacle? crashed = null;
 
   @override
   FutureOr<void> onLoad() async {
