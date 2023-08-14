@@ -21,13 +21,12 @@ class GameOver extends StatefulWidget {
 
 class _GameOverState extends State<GameOver> {
   bool _canEscape = false;
-  double? _best;
+  int? _best;
 
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     _fetch();
   }
 
@@ -66,7 +65,7 @@ class _GameOverState extends State<GameOver> {
                 Positioned(
                   top: 320 * widget.game.scale,
                   child: Text(
-                    "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\n${_best != null ? "best:" : ""}${_best?.toStringAsFixed(1) ?? ""}${_best != null ? " km" : ""}",
+                    "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\n${_best != null ? "best: ${(_best! / 100.0).toStringAsFixed(2)} km" : ""}",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 55 * widget.game.scale,
@@ -119,8 +118,8 @@ class _GameOverState extends State<GameOver> {
         "name": userName,
         "score": (widget.game.milage / widget.game.milageCoefficient * 100).round(),
       });
-      
-      print(res.data);
+
+      setState(() => _best = res.data["data"]["best"]);
     } catch (e) {
       print(e);
     }

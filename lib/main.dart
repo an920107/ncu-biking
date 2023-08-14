@@ -85,7 +85,7 @@ class Main extends FlameGame
         HasTappablesBridge {
   Main({String? token}) {
     httpService = HttpService(
-      "http://localhost:3001",
+      "https://api.ncufresh.ncu.edu.tw",
       token: token,
     );
   }
