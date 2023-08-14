@@ -63,7 +63,7 @@ class _InstructionState extends State<Instruction> {
                 Positioned(
                   top: 520 * widget.game.scale,
                   child: Text(
-                    "利用鍵盤或螢幕方向鍵移動\n　↑　：向前加速\n←　→：左右移動\n閃避路上的各種障礙物",
+                    "利用\"鍵盤\"或\"螢幕方向鍵\"移動\n　↑　：向前加速\n←　→：左右移動\n閃避路上的各種障礙物",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 48 * widget.game.scale,

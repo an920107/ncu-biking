@@ -3,20 +3,24 @@ import 'package:dio/dio.dart';
 class HttpService {
   late Dio _dio;
 
-  final baseUrl = "https://an920107.github.io/ncu-biking-deploy/";
-
-  HttpService() {
+  HttpService(String baseUrl, {String? token}) {
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
+      headers: token != null ? {"Authorization": "Bearer $token"} : null,
     ));
 
     initializeInterceptors();
   }
 
-  Future<Response> _request(String path, {required String method}) async {
+  Future<Response> _request(String path,
+      {required String method, Map<String, dynamic>? query}) async {
     Response response;
     try {
-      response = await _dio.request(path, options: Options(method: method));
+      response = await _dio.request(
+        path,
+        options: Options(method: method),
+        queryParameters: query,
+      );
     } on DioException catch (e) {
       print(e.message);
       throw Exception(e.message);
@@ -25,8 +29,12 @@ class HttpService {
     return response;
   }
 
-  Future<Response> get(String path) async {
-    return _request(path, method: 'get');
+  Future<Response> get(String path, {Map<String, dynamic>? query}) async {
+    return _request(path, method: 'get', query: query);
+  }
+
+  Future<Response> put(String path, {Map<String, dynamic>? query}) async {
+    return _request(path, method: 'put', query: query);
   }
 
   initializeInterceptors() {
