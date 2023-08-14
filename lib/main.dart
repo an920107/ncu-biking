@@ -83,9 +83,14 @@ class Main extends FlameGame
         HasKeyboardHandlerComponents,
         HasCollisionDetection,
         HasTappablesBridge {
-  Main({this.token});
+  Main({String? token}) {
+    httpService = HttpService(
+      "http://localhost:3001",
+      token: token,
+    );
+  }
 
-  final String? token;
+  late final HttpService httpService;
 
   final _backgroundSprite = SpriteComponent();
 
@@ -93,7 +98,6 @@ class Main extends FlameGame
   late final RouterComponent router;
   late final SpriteManager spriteManager;
   late final ImageManager imageManager;
-  final httpService = HttpService();
   final double coverWidth = 1120, coverHeight = 2136;
   final double backgroundWidth = 1920, backgroundHeight = 961;
   double scale = 1.0;

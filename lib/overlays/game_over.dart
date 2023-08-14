@@ -21,6 +21,15 @@ class GameOver extends StatefulWidget {
 
 class _GameOverState extends State<GameOver> {
   bool _canEscape = false;
+  double? _best;
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _fetch();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +38,6 @@ class _GameOverState extends State<GameOver> {
         setState(() => _canEscape = true);
       }
     });
-
-    // widget.game.httpService
-    //     .get("https://api.game.ncufresh.ncu.edu.tw/user/nickname")
-    //     .then((value) {
-    //   print(value.data);
-    // });
 
     return GestureDetector(
       onTap: _canEscape
@@ -63,7 +66,7 @@ class _GameOverState extends State<GameOver> {
                 Positioned(
                   top: 320 * widget.game.scale,
                   child: Text(
-                    "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\ntime: ${widget.game.accumulatedTime.toStringAsFixed(1)} s",
+                    "死因: ${_causeOfDeath(widget.game.crashed)}\nmilage: ${(widget.game.milage / widget.game.milageCoefficient).toStringAsFixed(2)} km\n${_best != null ? "best:" : ""}${_best?.toStringAsFixed(1) ?? ""}${_best != null ? " km" : ""}",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 55 * widget.game.scale,
@@ -98,4 +101,32 @@ class _GameOverState extends State<GameOver> {
     if (obstacle is Bird) return "笨笨烏秋";
     return "error";
   }
+
+  Future<void> _fetch() async {
+    // widget.game.httpService
+    //     .get("/game/rank")
+    //     .then((value) {
+    //   print(value.data);
+    // });
+
+    try {
+      final userInfo = await widget.game.httpService.get("/user/info");
+      final String userId = userInfo.data["username"].toString();
+      final String userName = userInfo.data["character"]["nickName"].toString();
+
+      final res = await widget.game.httpService.put("/game/score", query: {
+        "id": userId,
+        "name": userName,
+        "score": (widget.game.milage / widget.game.milageCoefficient * 100).round(),
+      });
+      
+      print(res.data);
+    } catch (e) {
+      print(e);
+    }
+  }
 }
+
+/*
+?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTE5ODAzNTMsImV4cCI6MTY5MTk4NzU1MywiaXNzIjoibG9jYWxob3N0OjMwMDEiLCJzdWIiOiIxIn0.XJxA4ogAY7EjcOGpwRs6qrR5dRrPr2x2dC7tlDE7LgQ
+*/
