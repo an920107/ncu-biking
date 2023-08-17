@@ -23,7 +23,6 @@ class _GameOverState extends State<GameOver> {
   bool _canEscape = false;
   int? _best;
 
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -102,21 +101,14 @@ class _GameOverState extends State<GameOver> {
   }
 
   Future<void> _fetch() async {
-    // widget.game.httpService
-    //     .get("/game/rank")
-    //     .then((value) {
-    //   print(value.data);
-    // });
-
     try {
       final userInfo = await widget.game.httpService.get("/user/info");
-      final String userId = userInfo.data["username"].toString();
       final String userName = userInfo.data["character"]["nickName"].toString();
 
       final res = await widget.game.httpService.put("/game/score", query: {
-        "id": userId,
         "name": userName,
-        "score": (widget.game.milage / widget.game.milageCoefficient * 100).round(),
+        "score":
+            (widget.game.milage / widget.game.milageCoefficient * 100).round(),
       });
 
       setState(() => _best = res.data["data"]["best"]);
@@ -125,7 +117,3 @@ class _GameOverState extends State<GameOver> {
     }
   }
 }
-
-/*
-?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTE5ODAzNTMsImV4cCI6MTY5MTk4NzU1MywiaXNzIjoibG9jYWxob3N0OjMwMDEiLCJzdWIiOiIxIn0.XJxA4ogAY7EjcOGpwRs6qrR5dRrPr2x2dC7tlDE7LgQ
-*/
