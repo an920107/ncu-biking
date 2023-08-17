@@ -6,7 +6,14 @@ class HttpService {
   HttpService(String baseUrl, {String? token}) {
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
-      headers: token != null ? {"Authorization": "Bearer $token"} : null,
+      headers: token != null
+          ? {
+              "Authorization": "Bearer $token",
+              "Access-Control-Allow-Origin": "*",
+            }
+          : {
+              "Access-Control-Allow-Origin": "*",
+            },
     ));
 
     initializeInterceptors();
