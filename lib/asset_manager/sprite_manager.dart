@@ -33,8 +33,7 @@ abstract class SpriteManager {
 
   static Future<List<Sprite>> _generateSpritesList(int length, Future<Sprite> Function(int index) generator) async {
     final List<Sprite?> spriteList = List.filled(length, null);
-    await Future.wait(
-        List.generate(length, (index) => generator(index).then((sprite) => spriteList[index] = sprite)));
+    await Future.wait(List.generate(length, (index) => generator(index).then((sprite) => spriteList[index] = sprite)));
     return List.unmodifiable(spriteList);
   }
 }

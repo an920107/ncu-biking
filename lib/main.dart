@@ -54,15 +54,15 @@ Future<void> main() async {
             ),
           )),
       home: Scaffold(
-        body: GameWidget(
-          game: Main(token: token),
+        body: GameWidget<NcuBikingGame>(
+          game: NcuBikingGame(token: token),
           overlayBuilderMap: {
-            "loading_icon": (BuildContext context, Main game) => LoadingIcon(game: game),
-            "start_game": (BuildContext context, Main game) => StartGame(game: game),
-            "instruction": (BuildContext context, Main game) => Instruction(game: game),
-            "milage_hud": (BuildContext context, Main game) => MilageHud(game: game),
-            "joystick": (BuildContext context, Main game) => Joystick(game: game),
-            "game_over": (BuildContext context, Main game) => GameOver(game: game),
+            "loading_icon": (_, game) => LoadingIcon(game: game),
+            "start_game": (_, game) => StartGame(game: game),
+            "instruction": (_, game) => Instruction(game: game),
+            "milage_hud": (_, game) => MilageHud(game: game),
+            "joystick": (_, game) => Joystick(game: game),
+            "game_over": (_, game) => GameOver(game: game),
           },
           initialActiveOverlays: const ["loading_icon"],
         ),
@@ -71,8 +71,8 @@ Future<void> main() async {
   ));
 }
 
-class Main extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDetection {
-  Main({String? token}) {
+class NcuBikingGame extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDetection {
+  NcuBikingGame({String? token}) {
     httpService = HttpService(
       "https://api.game.ncufresh.ncu.edu.tw",
       token: token,
@@ -101,14 +101,12 @@ class Main extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDete
   @override
   FutureOr<void> onLoad() async {
     await Future.wait([
-      () async {
-        add(_backgroundSprite
-          ..sprite = await Sprite.load("cover/background.png")
-          ..anchor = Anchor.center);
-      }(),
-      () async {
-        faviconImage = (await rootBundle.load("assets/images/cover/favicon.gif")).buffer.asUint8List();
-      }(),
+      Sprite.load("cover/background.png").then((sprite) => add(
+            _backgroundSprite
+              ..sprite = sprite
+              ..anchor = Anchor.center,
+          )),
+      rootBundle.load("assets/images/cover/favicon.gif").then((data) => faviconImage = data.buffer.asUint8List()),
     ]);
 
     add(router = RouterComponent(

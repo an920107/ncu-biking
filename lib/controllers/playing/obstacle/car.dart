@@ -12,7 +12,7 @@ class Car extends Obstacle {
 
   @override
   FutureOr<void> onLoad() async {
-    sprite = gameRef.spriteManager.cars[Random().nextInt(3)];
+    sprite = game.spriteManager.cars[Random().nextInt(3)];
     anchor = Anchor.center;
     angle = pi / 180 * 90;
     return super.onLoad();
@@ -21,7 +21,7 @@ class Car extends Obstacle {
   @override
   void onMount() {
     position = Vector2(
-      gameRef.size.x / 2 + (Random().nextBool() ? 1 : -1) * 400 * gameRef.scale,
+      game.size.x / 2 + (Random().nextBool() ? 1 : -1) * 400 * game.scale,
       -size.y / 2,
     );
     super.onMount();
@@ -29,9 +29,9 @@ class Car extends Obstacle {
 
   @override
   void update(double dt) {
-    if (gameRef.isPlaying) {
-      position.y += gameRef.baseSpeed * dt * gameRef.scale;
-      if (position.y > gameRef.size.y + size.y) {
+    if (game.isPlaying) {
+      position.y += game.baseSpeed * dt * game.scale;
+      if (position.y > game.size.y + size.y) {
         removeFromParent();
       }
     }

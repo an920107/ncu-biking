@@ -12,18 +12,18 @@ class Road extends ScalableSprite {
   final Function()? _onArrived;
   Road? linked;
 
-  late final double _speed = gameRef.baseSpeed;
+  late final double _speed = game.baseSpeed;
 
   @override
   void update(double dt) {
-    if (gameRef.isPlaying) {
+    if (game.isPlaying) {
       if (linked == null) {
-        position.y += dt * _speed * gameRef.scale;
-        if (position.y > gameRef.size.y + size.y) {
+        position.y += dt * _speed * game.scale;
+        if (position.y > game.size.y + size.y) {
           if (_onArrived != null) _onArrived!.call();
         }
       } else {
-        position.y = linked!.y - linked!.size.y + dt * _speed * gameRef.scale;
+        position.y = linked!.y - linked!.size.y + dt * _speed * game.scale;
       }
     }
     super.update(dt);
@@ -31,7 +31,7 @@ class Road extends ScalableSprite {
 
   @override
   void onGameResize(Vector2 size) {
-    position.x = gameRef.size.x / 2;
+    position.x = game.size.x / 2;
     super.onGameResize(size);
   }
 }

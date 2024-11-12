@@ -9,7 +9,7 @@ class LoadingIcon extends StatelessWidget {
     required this.game,
   });
 
-  final Main game;
+  final NcuBikingGame game;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class LoadingIcon extends StatelessWidget {
           Container(
             width: squareSize,
             height: squareSize,
-            constraints: const BoxConstraints(
-                maxHeight: squareSizeLimit, maxWidth: squareSizeLimit),
+            constraints: const BoxConstraints(maxHeight: squareSizeLimit, maxWidth: squareSizeLimit),
             child: Image.memory(game.faviconImage),
           ),
           Text(

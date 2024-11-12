@@ -15,7 +15,7 @@ import 'package:ncu_biking/main.dart';
 /// - Person, 橫向移動
 /// - Bird, 斜向後移動
 
-class Playing extends Component with HasGameRef<Main> {
+class Playing extends Component with HasGameRef<NcuBikingGame> {
   final double _updateTime = 0.1;
   int stage = 0;
 
@@ -98,8 +98,7 @@ class Playing extends Component with HasGameRef<Main> {
   }
 
   bool _toGenerate(int index) {
-    return Random().nextDouble() < _frequencyTable[stage][index] &&
-        _coldDown[index] <= 0;
+    return Random().nextDouble() < _frequencyTable[stage][index] && _coldDown[index] <= 0;
   }
 
   void _coldDownReset(int index) {

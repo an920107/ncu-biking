@@ -5,7 +5,7 @@ import 'package:ncu_biking/asset_manager/image_manager.dart';
 import 'package:ncu_biking/main.dart';
 import 'package:ncu_biking/asset_manager/sprite_manager.dart';
 
-class Loading extends Component with HasGameRef<Main> {
+class Loading extends Component with HasGameRef<NcuBikingGame> {
   @override
   FutureOr<void> onLoad() async {
     await Future.wait([

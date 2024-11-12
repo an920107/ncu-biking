@@ -14,7 +14,7 @@ class GameOver extends StatefulWidget {
     required this.game,
   });
 
-  final Main game;
+  final NcuBikingGame game;
 
   @override
   State<GameOver> createState() => _GameOverState();

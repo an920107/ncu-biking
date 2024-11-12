@@ -20,8 +20,7 @@ class HttpService {
     initializeInterceptors();
   }
 
-  Future<Response> _request(String path,
-      {required String method, Map<String, dynamic>? query}) async {
+  Future<Response> _request(String path, {required String method, Map<String, dynamic>? query}) async {
     Response response;
     try {
       response = await _dio.request(

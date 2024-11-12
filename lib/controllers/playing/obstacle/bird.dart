@@ -20,7 +20,7 @@ class Bird extends Obstacle {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 4; i++) {
-      _sprites.add(gameRef.spriteManager.birds[i]);
+      _sprites.add(game.spriteManager.birds[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;
@@ -42,20 +42,20 @@ class Bird extends Obstacle {
   @override
   void onMount() {
     position = Vector2(
-      gameRef.size.x / 2 + (_rightForward ? -1 : 1) * 520 * gameRef.scale,
-      size.y + Random().nextInt((gameRef.size.y / 3 - size.y).toInt()),
+      game.size.x / 2 + (_rightForward ? -1 : 1) * 520 * game.scale,
+      size.y + Random().nextInt((game.size.y / 3 - size.y).toInt()),
     );
     super.onMount();
   }
 
   @override
   void update(double dt) {
-    if (gameRef.isPlaying) {
-      position.y += (gameRef.baseSpeed + _speed) * dt * gameRef.scale;
-      position.x += (_rightForward ? 1 : -1) * _speed * dt * gameRef.scale;
-      if (position.y > gameRef.size.y + size.y ||
-          position.x < gameRef.size.x / 2 - 550 * gameRef.scale ||
-          position.x > gameRef.size.x / 2 + 550 * gameRef.scale) {
+    if (game.isPlaying) {
+      position.y += (game.baseSpeed + _speed) * dt * game.scale;
+      position.x += (_rightForward ? 1 : -1) * _speed * dt * game.scale;
+      if (position.y > game.size.y + size.y ||
+          position.x < game.size.x / 2 - 550 * game.scale ||
+          position.x > game.size.x / 2 + 550 * game.scale) {
         removeFromParent();
       }
     }

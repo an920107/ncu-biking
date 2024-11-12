@@ -7,7 +7,7 @@ class StartGame extends StatelessWidget {
     required this.game,
   });
 
-  final Main game;
+  final NcuBikingGame game;
 
   @override
   Widget build(BuildContext context) {

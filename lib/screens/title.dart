@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:ncu_biking/main.dart';
 
-class Title extends Component with HasGameRef<Main> {
+class Title extends Component with HasGameRef<NcuBikingGame> {
   final _cover = SpriteComponent();
   final _startButton = SpriteButtonComponent();
 

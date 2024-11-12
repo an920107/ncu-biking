@@ -18,7 +18,7 @@ class Bus extends Obstacle {
   @override
   FutureOr<void> onLoad() async {
     for (int i = 0; i < 6; i++) {
-      _sprites.add(gameRef.spriteManager.buses[i]);
+      _sprites.add(game.spriteManager.buses[i]);
     }
     sprite = _sprites.first;
     anchor = Anchor.center;
@@ -40,16 +40,16 @@ class Bus extends Obstacle {
   @override
   void onMount() {
     position = Vector2(
-      gameRef.size.x / 2,
-      gameRef.size.y + size.y / 2,
+      game.size.x / 2,
+      game.size.y + size.y / 2,
     );
     super.onMount();
   }
 
   @override
   void update(double dt) {
-    if (gameRef.isPlaying) {
-      position.y -= gameRef.baseSpeed * dt * gameRef.scale;
+    if (game.isPlaying) {
+      position.y -= game.baseSpeed * dt * game.scale;
       if (position.y < -size.y) {
         removeFromParent();
       }

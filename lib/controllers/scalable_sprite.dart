@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:ncu_biking/main.dart';
 
-class ScalableSprite extends SpriteComponent with HasGameRef<Main> {
+class ScalableSprite extends SpriteComponent with HasGameReference<NcuBikingGame> {
   ScalableSprite({
     required this.coefficient,
     super.sprite,
@@ -12,9 +12,7 @@ class ScalableSprite extends SpriteComponent with HasGameRef<Main> {
   @override
   void onGameResize(Vector2 size) {
     super.size = (sprite?.originalSize ?? Vector2.zero()) *
-        (gameRef.scale *
-            coefficient *
-            (gameRef.coverWidth / (sprite?.originalSize ?? Vector2.zero()).x));
+        (game.scale * coefficient * (game.coverWidth / (sprite?.originalSize ?? Vector2.zero()).x));
     super.onGameResize(size);
   }
 }
