@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ncu_biking/controllers/playing/obstacle.dart';
 import 'package:ncu_biking/controllers/playing/obstacle/bird.dart';
@@ -113,7 +114,9 @@ class _GameOverState extends State<GameOver> {
 
       setState(() => _best = res.data["data"]["best"]);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

@@ -106,9 +106,9 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
   }
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (gameRef.isPlaying) {
-      if (event is RawKeyDownEvent) {
+      if (event is KeyDownEvent) {
         switch (event.logicalKey) {
           case LogicalKeyboardKey.arrowLeft:
           case LogicalKeyboardKey.keyA:
@@ -125,7 +125,7 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
           default:
             break;
         }
-      } else if (event is RawKeyUpEvent) {
+      } else if (event is KeyUpEvent) {
         switch (event.logicalKey) {
           case LogicalKeyboardKey.arrowUp:
           case LogicalKeyboardKey.keyW:

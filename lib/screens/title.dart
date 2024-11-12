@@ -15,7 +15,6 @@ class Title extends Component with HasGameRef<Main> {
 
     _startButton
       ..button = gameRef.spriteManager.start
-      ..buttonDown = null
       ..onPressed = () {
         gameRef.router.pushNamed("playing");
       };

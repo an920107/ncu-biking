@@ -30,13 +30,10 @@ class Joystick extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTapDown: (details) => game.onKeyEvent(
-                    const RawKeyDownEvent(
-                      data: RawKeyEventDataWeb(
-                        code: "ArrowLeft",
-                        key: "ArrowLeft",
-                        metaState: 0,
-                        keyCode: 37,
-                      ),
+                    const KeyDownEvent(
+                      physicalKey: PhysicalKeyboardKey.arrowLeft,
+                      logicalKey: LogicalKeyboardKey.arrowLeft,
+                      timeStamp: Durations.short1,
                     ),
                     {LogicalKeyboardKey.arrowLeft},
                   ),
@@ -69,13 +66,10 @@ class Joystick extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTapDown: (details) => game.onKeyEvent(
-                    const RawKeyDownEvent(
-                      data: RawKeyEventDataWeb(
-                        code: "ArrowRight",
-                        key: "ArrowRight",
-                        metaState: 0,
-                        keyCode: 39,
-                      ),
+                    const KeyDownEvent(
+                      physicalKey: PhysicalKeyboardKey.arrowRight,
+                      logicalKey: LogicalKeyboardKey.arrowRight,
+                      timeStamp: Durations.short1,
                     ),
                     {LogicalKeyboardKey.arrowRight},
                   ),
@@ -108,24 +102,18 @@ class Joystick extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTapDown: (detial) => game.onKeyEvent(
-                    const RawKeyDownEvent(
-                      data: RawKeyEventDataWeb(
-                        code: "ArrowUp",
-                        key: "ArrowUp",
-                        metaState: 0,
-                        keyCode: 38,
-                      ),
+                    const KeyDownEvent(
+                      physicalKey: PhysicalKeyboardKey.arrowUp,
+                      logicalKey: LogicalKeyboardKey.arrowUp,
+                      timeStamp: Durations.short1,
                     ),
                     {LogicalKeyboardKey.arrowUp},
                   ),
                   onTapUp: (detail) => game.onKeyEvent(
-                    const RawKeyUpEvent(
-                      data: RawKeyEventDataWeb(
-                        code: "ArrowUp",
-                        key: "ArrowUp",
-                        metaState: 0,
-                        keyCode: 38,
-                      ),
+                    const KeyUpEvent(
+                      physicalKey: PhysicalKeyboardKey.arrowUp,
+                      logicalKey: LogicalKeyboardKey.arrowUp,
+                      timeStamp: Durations.short1,
                     ),
                     {LogicalKeyboardKey.arrowUp},
                   ),
