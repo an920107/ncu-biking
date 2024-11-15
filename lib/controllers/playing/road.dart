@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ncu_biking/controllers/scalable_sprite.dart';
 
 class Road extends ScalableSprite {
@@ -6,10 +7,10 @@ class Road extends ScalableSprite {
     super.coefficient = 1.0,
     required super.sprite,
     this.linked,
-    dynamic Function()? onArrived,
+    VoidCallback? onArrived,
   }) : _onArrived = onArrived;
 
-  final Function()? _onArrived;
+  final VoidCallback? _onArrived;
   Road? linked;
 
   late final double _speed = game.baseSpeed;

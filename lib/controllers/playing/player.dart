@@ -146,9 +146,9 @@ class Player extends ScalableSprite with CollisionCallbacks, KeyboardHandler {
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
-    try {
-      game.crashed = other.parent as Obstacle;
-    } catch (e) {
+    if (other case final Obstacle obstacle) {
+      game.crashed = obstacle;
+    } else {
       game.crashed = null;
     }
     game.overlays.add("game_over");
