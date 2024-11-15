@@ -94,10 +94,10 @@ class _GameOverState extends State<GameOver> {
   }
 
   String _causeOfDeath(Obstacle? obstacle) {
-    if (obstacle is Bus) return "超速公車";
-    if (obstacle is Car) return "違停車輛";
-    if (obstacle is Person) return "白目行人";
-    if (obstacle is Bird) return "笨笨烏秋";
+    if (obstacle case Bus()) return "超速公車";
+    if (obstacle case Car()) return "違停車輛";
+    if (obstacle case Person()) return "白目行人";
+    if (obstacle case Bird()) return "笨笨烏秋";
     return "error";
   }
 
