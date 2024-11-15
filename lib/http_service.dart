@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class HttpService {
   late Dio _dio;
@@ -22,18 +21,11 @@ class HttpService {
 
   Future<Response> _request(String path, {required String method, Map<String, dynamic>? query}) async {
     Response response;
-    try {
-      response = await _dio.request(
-        path,
-        options: Options(method: method),
-        queryParameters: query,
-      );
-    } on DioException catch (e) {
-      if (kDebugMode) {
-        print(e.message);
-      }
-      throw Exception(e.message);
-    }
+    response = await _dio.request(
+      path,
+      options: Options(method: method),
+      queryParameters: query,
+    );
 
     return response;
   }
@@ -50,9 +42,6 @@ class HttpService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          if (kDebugMode) {
-            print("${options.method} ${options.path}");
-          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
